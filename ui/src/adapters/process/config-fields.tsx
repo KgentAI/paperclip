@@ -1,4 +1,5 @@
 import type { AdapterConfigFieldsProps } from "../types";
+import { useTranslation } from "react-i18next";
 import {
   Field,
   DraftInput,
@@ -32,9 +33,10 @@ export function ProcessConfigFields({
   eff,
   mark,
 }: AdapterConfigFieldsProps) {
+  const { t } = useTranslation();
   return (
     <>
-      <Field label="Command" hint={help.command}>
+      <Field label={t("adapters.command")} hint={help.command}>
         <DraftInput
           value={
             isCreate
@@ -48,10 +50,10 @@ export function ProcessConfigFields({
           }
           immediate
           className={inputClass}
-          placeholder="e.g. node, python"
+          placeholder={t("adapters.placeholders.command")}
         />
       </Field>
-      <Field label="Args (comma-separated)" hint={help.args}>
+      <Field label={t("adapters.args")} hint={help.args}>
         <DraftInput
           value={
             isCreate
@@ -69,7 +71,7 @@ export function ProcessConfigFields({
           }
           immediate
           className={inputClass}
-          placeholder="e.g. script.js, --flag"
+          placeholder={t("adapters.placeholders.args")}
         />
       </Field>
     </>

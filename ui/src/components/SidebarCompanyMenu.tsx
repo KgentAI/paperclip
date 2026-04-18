@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { ChevronDown, LogOut, Settings, UserPlus } from "lucide-react";
 import { Link } from "@/lib/router";
 import { authApi } from "@/api/auth";
@@ -17,6 +18,7 @@ import { queryKeys } from "@/lib/queryKeys";
 import { useSidebar } from "../context/SidebarContext";
 
 export function SidebarCompanyMenu() {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const queryClient = useQueryClient();
   const { selectedCompany } = useCompany();
@@ -47,7 +49,7 @@ export function SidebarCompanyMenu() {
         <Button
           variant="ghost"
           className="h-auto flex-1 justify-start gap-1 px-2 py-1.5 text-left"
-          aria-label={selectedCompany ? `Open ${selectedCompany.name} menu` : "Open company menu"}
+          aria-label={selectedCompany ? t("sidebar.company.openMenu", { name: selectedCompany.name }) : t("sidebar.company.openCompanyMenu")}
           disabled={!selectedCompany}
         >
           <span className="flex min-w-0 flex-1 items-center gap-2">
@@ -58,7 +60,7 @@ export function SidebarCompanyMenu() {
               />
             ) : null}
             <span className="truncate text-sm font-bold text-foreground">
-              {selectedCompany?.name ?? "Select company"}
+              {selectedCompany?.name ?? t("sidebar.company.selectCompany")}
             </span>
           </span>
           <ChevronDown className="size-4 shrink-0 text-muted-foreground" />
@@ -66,21 +68,21 @@ export function SidebarCompanyMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="w-64">
         <DropdownMenuLabel className="truncate">
-          {selectedCompany?.name ?? "Company"}
+          {selectedCompany?.name ?? t("sidebar.company.company")}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <Link to="/company/settings/invites" onClick={closeNavigationChrome}>
             <UserPlus className="size-4" />
             <span className="truncate">
-              {selectedCompany ? `Invite people to ${selectedCompany.name}` : "Invite people"}
+              {selectedCompany ? t("sidebar.company.inviteTo", { name: selectedCompany.name }) : t("sidebar.company.invitePeople")}
             </span>
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link to="/company/settings" onClick={closeNavigationChrome}>
             <Settings className="size-4" />
-            <span>Company settings</span>
+            <span>{t("sidebar.company.companySettings")}</span>
           </Link>
         </DropdownMenuItem>
         {session?.session ? (
@@ -92,7 +94,7 @@ export function SidebarCompanyMenu() {
               disabled={signOutMutation.isPending}
             >
               <LogOut className="size-4" />
-              <span>{signOutMutation.isPending ? "Signing out..." : "Sign out"}</span>
+              <span>{signOutMutation.isPending ? t("sidebar.account.signingOut") : t("sidebar.account.signOut")}</span>
             </DropdownMenuItem>
           </>
         ) : null}

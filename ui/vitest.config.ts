@@ -10,5 +10,6 @@ export default defineConfig({
   },
   test: {
     environment: "node",
+    setupFiles: [path.resolve(__dirname, "./src/test-i18n-mock.ts")],
   },
 });

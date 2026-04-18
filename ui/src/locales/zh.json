@@ -1,0 +1,563 @@
+{
+  "common": {
+    "action": {
+      "save": "保存",
+      "cancel": "取消",
+      "delete": "删除",
+      "create": "创建",
+      "close": "关闭",
+      "submit": "提交",
+      "confirm": "确认",
+      "edit": "编辑",
+      "add": "添加",
+      "remove": "移除",
+      "search": "搜索",
+      "filter": "筛选",
+      "refresh": "刷新",
+      "retry": "重试",
+      "loading": "加载中...",
+      "noResults": "未找到结果",
+      "viewAll": "查看全部",
+      "learnMore": "了解更多",
+      "dismiss": "关闭通知",
+      "copied": "已复制！",
+      "copy": "复制",
+      "start": "启动",
+      "stop": "停止",
+      "restart": "重启",
+      "run": "运行",
+      "selectOption": "选择一个选项"
+    },
+    "label": {
+      "name": "名称",
+      "description": "描述",
+      "status": "状态",
+      "type": "类型",
+      "date": "日期",
+      "none": "无",
+      "default": "默认",
+      "enabled": "已启用",
+      "disabled": "已禁用",
+      "subIssues": "子任务",
+      "editProfile": "编辑资料",
+      "signOut": "退出登录"
+    },
+    "error": {
+      "generic": "出错了，请重试。",
+      "network": "网络错误，请检查连接。",
+      "notFound": "未找到",
+      "unauthorized": "未授权",
+      "forbidden": "访问被拒绝"
+    },
+    "time": {
+      "justNow": "刚刚",
+      "minutesAgo": "{{count}} 分钟前",
+      "hoursAgo": "{{count}} 小时前",
+      "daysAgo": "{{count}} 天前"
+    },
+    "feedback": {
+      "notePlaceholder": "添加简短备注"
+    }
+  },
+  "sidebar": {
+    "newIssue": "新建任务",
+    "nav": {
+      "dashboard": "仪表盘",
+      "inbox": "收件箱",
+      "issues": "任务",
+      "routines": "例程",
+      "goals": "目标",
+      "org": "组织",
+      "skills": "技能",
+      "costs": "成本",
+      "activity": "活动",
+      "settings": "设置",
+      "agents": "代理",
+      "projects": "项目",
+      "approvals": "审批",
+      "adapters": "适配器",
+      "plugins": "插件"
+    },
+    "sections": {
+      "work": "工作",
+      "company": "公司"
+    },
+    "account": {
+      "profile": "个人资料",
+      "settings": "设置",
+      "signOut": "退出登录"
+    }
+  },
+  "issues": {
+    "title": "任务",
+    "newIssue": "新建任务",
+    "newSubIssue": "新建子任务",
+    "createIssue": "创建任务",
+    "editIssue": "编辑任务",
+    "issueTitle": "任务标题",
+    "description": "描述",
+    "addDescription": "添加描述...",
+    "properties": "属性",
+    "documents": "文档",
+    "comments": "评论",
+    "noAssignee": "无负责人",
+    "noProject": "无项目",
+    "noParent": "无父任务",
+    "noLabels": "无标签",
+    "subIssues": "子任务",
+    "runReviewNow": "立即运行审核",
+    "runApprovalNow": "立即运行审批",
+    "willNoLongerUseParentWorkspace": "将不再使用父任务工作区",
+    "status": {
+      "backlog": "待规划",
+      "todo": "待办",
+      "inProgress": "进行中",
+      "inReview": "审核中",
+      "done": "已完成",
+      "blocked": "已阻塞",
+      "cancelled": "已取消"
+    },
+    "priority": {
+      "critical": "紧急",
+      "high": "高",
+      "medium": "中",
+      "low": "低"
+    },
+    "filter": {
+      "search": "搜索任务...",
+      "searchCreators": "搜索创建者...",
+      "searchAssignees": "搜索负责人...",
+      "searchProjects": "搜索项目...",
+      "searchLabels": "搜索标签...",
+      "status": "状态",
+      "priority": "优先级",
+      "assignee": "负责人",
+      "creator": "创建者",
+      "project": "项目",
+      "label": "标签",
+      "dateRange": "日期范围"
+    },
+    "columns": {
+      "status": "状态",
+      "priority": "优先级",
+      "assignee": "负责人",
+      "project": "项目",
+      "updated": "更新时间",
+      "created": "创建时间"
+    },
+    "empty": {
+      "noIssues": "暂无任务",
+      "noIssuesDescription": "创建你的第一个任务来开始工作。",
+      "createOne": "点击创建"
+    },
+    "labels": {
+      "newLabel": "新标签",
+      "addLabels": "添加标签"
+    }
+  },
+  "agents": {
+    "title": "代理",
+    "newAgent": "新建代理",
+    "createAgent": "创建代理",
+    "editAgent": "编辑代理",
+    "agentName": "代理名称",
+    "agentTitle": "职位（例如：工程副总裁）",
+    "role": {
+      "ceo": "CEO",
+      "cto": "CTO",
+      "cmo": "CMO",
+      "cfo": "CFO",
+      "engineer": "工程师",
+      "designer": "设计师",
+      "pm": "产品经理",
+      "qa": "测试工程师",
+      "devops": "运维工程师",
+      "researcher": "研究员",
+      "general": "通用"
+    },
+    "status": {
+      "active": "活跃",
+      "paused": "已暂停",
+      "idle": "空闲",
+      "running": "运行中",
+      "error": "错误",
+      "pendingApproval": "待审批",
+      "terminated": "已终止"
+    },
+    "config": {
+      "adapter": "适配器",
+      "instructionsFile": "指令文件",
+      "heartbeatInterval": "心跳间隔",
+      "autoStart": "分配时自动启动",
+      "maxRetries": "最大重试次数"
+    },
+    "empty": {
+      "noAgents": "暂无代理",
+      "noAgentsDescription": "添加你的第一个代理来组建团队。"
+    }
+  },
+  "goals": {
+    "title": "目标",
+    "newGoal": "新建目标",
+    "createGoal": "创建目标",
+    "editGoal": "编辑目标",
+    "goalTitle": "目标标题",
+    "addDescription": "添加描述...",
+    "level": {
+      "company": "公司",
+      "team": "团队",
+      "agent": "代理",
+      "task": "任务"
+    },
+    "status": {
+      "planned": "已规划",
+      "active": "进行中",
+      "achieved": "已达成",
+      "cancelled": "已取消"
+    },
+    "empty": {
+      "noGoals": "暂无目标",
+      "noGoalsDescription": "定义目标来对齐团队方向。"
+    }
+  },
+  "projects": {
+    "title": "项目",
+    "newProject": "新建项目",
+    "createProject": "创建项目",
+    "editProject": "编辑项目",
+    "projectName": "项目名称",
+    "addDescription": "添加描述...",
+    "workspaceName": "工作区名称",
+    "status": {
+      "backlog": "待规划",
+      "planned": "已规划",
+      "inProgress": "进行中",
+      "completed": "已完成",
+      "cancelled": "已取消"
+    },
+    "empty": {
+      "noProjects": "暂无项目",
+      "noProjectsDescription": "创建项目来组织你的工作。"
+    }
+  },
+  "dashboard": {
+    "title": "仪表盘",
+    "welcome": "欢迎使用 Paperclip",
+    "getStarted": "开始使用",
+    "recentActivity": "近期活动",
+    "recentTasks": "近期任务",
+    "metrics": {
+      "agentsEnabled": "已启用代理",
+      "tasksInProgress": "进行中任务",
+      "monthSpend": "本月支出",
+      "openIssues": "待处理任务",
+      "completedIssues": "已完成任务",
+      "activeGoals": "活跃目标"
+    },
+    "latestRun": {
+      "title": "最近运行",
+      "noRuns": "暂无运行记录"
+    }
+  },
+  "inbox": {
+    "title": "收件箱",
+    "search": "搜索收件箱…",
+    "category": "类别",
+    "approvalStatus": "审批状态",
+    "empty": {
+      "noItems": "收件箱为空",
+      "noItemsDescription": "通知和待处理事项将显示在这里。"
+    }
+  },
+  "approvals": {
+    "title": "审批",
+    "approvalDetail": "审批详情",
+    "pending": "待审批",
+    "approved": "已批准",
+    "rejected": "已拒绝",
+    "revisionRequested": "需修改",
+    "cancelled": "已取消",
+    "approve": "批准",
+    "reject": "拒绝",
+    "requestChanges": "要求修改",
+    "addComment": "添加评论...",
+    "types": {
+      "hireAgent": "雇佣代理",
+      "approveCeoStrategy": "批准 CEO 策略",
+      "budgetOverride": "预算超限审批",
+      "boardApproval": "请求董事会审批"
+    }
+  },
+  "costs": {
+    "title": "成本",
+    "budgets": "预算",
+    "spend": "支出",
+    "openBudgets": "查看预算",
+    "noBudgets": "未配置预算",
+    "monthToDate": "本月累计",
+    "budgetPolicy": "预算策略",
+    "budgetLimit": "预算上限",
+    "softThreshold": "软阈值",
+    "hardThreshold": "硬阈值"
+  },
+  "activity": {
+    "title": "活动",
+    "recentActivity": "近期活动",
+    "empty": {
+      "noActivity": "暂无活动",
+      "noActivityDescription": "代理工作时，操作和事件将显示在这里。"
+    }
+  },
+  "routines": {
+    "title": "例程",
+    "newRoutine": "新建例程",
+    "createRoutine": "创建例程",
+    "editRoutine": "编辑例程",
+    "triggerKind": "触发类型",
+    "schedule": "定时触发",
+    "webhook": "Webhook",
+    "manual": "手动触发",
+    "status": {
+      "active": "活跃",
+      "paused": "已暂停",
+      "archived": "已归档"
+    },
+    "runStatus": {
+      "received": "已接收",
+      "coalesced": "已合并",
+      "skipped": "已跳过",
+      "issueCreated": "任务已创建",
+      "completed": "已完成",
+      "failed": "已失败"
+    },
+    "empty": {
+      "noRoutines": "暂无例程",
+      "noRoutinesDescription": "创建例程来自动化重复性任务。"
+    }
+  },
+  "company": {
+    "title": "公司",
+    "createCompany": "创建公司",
+    "settings": "公司设置",
+    "import": "导入",
+    "export": "导出",
+    "membership": {
+      "role": {
+        "owner": "所有者",
+        "admin": "管理员",
+        "operator": "操作员",
+        "viewer": "查看者"
+      }
+    },
+    "status": {
+      "active": "活跃",
+      "paused": "已暂停",
+      "archived": "已归档"
+    }
+  },
+  "org": {
+    "title": "组织",
+    "orgChart": "组织架构图",
+    "addMember": "添加成员",
+    "invite": "邀请",
+    "reportsTo": "汇报给",
+    "noReports": "无下属"
+  },
+  "settings": {
+    "title": "设置",
+    "instance": "实例设置",
+    "general": "通用",
+    "experimental": "实验性",
+    "access": "访问权限",
+    "profile": {
+      "title": "个人设置",
+      "language": "语言",
+      "languageOptions": {
+        "en": "English",
+        "zh": "中文"
+      }
+    },
+    "invites": "邀请",
+    "skills": "技能",
+    "adapterManager": "适配器管理"
+  },
+  "onboarding": {
+    "title": "开始使用",
+    "welcome": "欢迎使用 Paperclip！",
+    "step1": "创建公司",
+    "step2": "添加代理",
+    "step3": "定义目标",
+    "step4": "开始工作",
+    "skip": "跳过",
+    "next": "下一步",
+    "back": "上一步",
+    "finish": "完成"
+  },
+  "toast": {
+    "issueCreated": "任务已创建",
+    "issueUpdated": "任务已更新",
+    "issueCreatedWithWarnings": "{{ref}} 已创建，但附件有警告",
+    "uploadWarningsBody": "{{count}} 个文件无法添加。",
+    "agentCreated": "代理已创建",
+    "agentUpdated": "代理已更新",
+    "goalCreated": "目标已创建",
+    "goalUpdated": "目标已更新",
+    "projectCreated": "项目已创建",
+    "saved": "已保存",
+    "deleted": "已删除",
+    "copiedToClipboard": "已复制到剪贴板",
+    "failedToCreate": "创建失败，请重试。",
+    "failedToUpdate": "更新失败，请重试。"
+  },
+  "workspaces": {
+    "title": "工作区",
+    "newWorkspace": "新建工作区",
+    "runtime": {
+      "stopped": "已停止",
+      "starting": "启动中",
+      "running": "运行中",
+      "runOnce": "运行一次",
+      "stopping": "停止中"
+    }
+  },
+  "runs": {
+    "status": {
+      "queued": "排队中",
+      "running": "运行中",
+      "succeeded": "已成功",
+      "failed": "已失败",
+      "cancelled": "已取消",
+      "timedOut": "已超时"
+    }
+  },
+  "notFound": {
+    "title": "页面未找到",
+    "description": "你访问的页面不存在。",
+    "goHome": "返回首页"
+  },
+  "commandPalette": {
+    "placeholder": "输入命令或搜索…",
+    "actions": "操作",
+    "navigation": "导航"
+  },
+  "transcript": {
+    "title": "运行记录",
+    "noOutput": "暂无输出",
+    "stderr": "标准错误"
+  },
+  "auth": {
+    "title": "登录",
+    "signIn": "登录",
+    "signOut": "退出登录",
+    "board": "Board"
+  },
+  "plugins": {
+    "title": "插件",
+    "manager": "插件管理器",
+    "install": "安装插件",
+    "uninstall": "卸载",
+    "enable": "启用",
+    "disable": "禁用",
+    "status": {
+      "installed": "已安装",
+      "ready": "就绪",
+      "disabled": "已禁用",
+      "error": "错误",
+      "upgradePending": "待升级",
+      "uninstalled": "已卸载"
+    }
+  },
+  "adapters": {
+    "title": "适配器",
+    "manager": "适配器管理器",
+    "config": "配置",
+    "token": "令牌",
+    "openClawGatewayToken": "OpenClaw 网关令牌",
+    "apiKey": "API 密钥",
+    "endpoint": "端点",
+    "selectAdapter": "选择适配器",
+    "gatewayUrl": "网关 URL",
+    "paperclipApiUrlOverride": "Paperclip API URL 覆盖",
+    "claimedApiKeyPath": "声明的 API 密钥路径",
+    "sessionStrategy": "会话策略",
+    "sessionStrategyOptions": {
+      "fixed": "固定",
+      "issue": "按任务",
+      "run": "按运行"
+    },
+    "sessionKey": "会话密钥",
+    "gatewayAuthToken": "网关认证令牌 (x-openclaw-token)",
+    "role": "角色",
+    "scopes": "作用域 (逗号分隔)",
+    "waitTimeoutMs": "等待超时 (毫秒)",
+    "deviceAuth": "设备认证",
+    "deviceAuthDescription": "始终为网关代理启用。Paperclip 在引导期间持久化设备密钥，以便配对批准在多次运行中保持稳定。",
+    "agentInstructionsFile": "代理指令文件",
+    "instructionsFileHint": "指向定义此代理行为的 markdown 文件（例如 AGENTS.md）的绝对路径。在运行时注入到系统提示中。",
+    "instructionsFileHintCodex": "指向定义此代理行为的 markdown 文件（例如 AGENTS.md）的绝对路径。在运行时注入到系统提示中。注意：Codex 可能仍会自动应用来自工作区的仓库级 AGENTS.md 文件。",
+    "instructionsFileHintCursor": "指向定义此代理行为的 markdown 文件（例如 AGENTS.md）的绝对路径。在运行时注入到提示中。",
+    "instructionsFileHintGemini": "指向定义此代理行为的 markdown 文件（例如 AGENTS.md）的绝对路径。在运行时前置到 Gemini 提示中。",
+    "enableChrome": "启用 Chrome",
+    "skipPermissions": "跳过权限",
+    "webhookUrl": "Webhook URL",
+    "command": "命令",
+    "args": "参数（逗号分隔）",
+    "maxTurnsPerRun": "每次运行最大轮数",
+    "bypassSandbox": "绕过沙箱",
+    "enableSearch": "启用搜索",
+    "fastMode": "快速模式",
+    "fastModeWarning": "快速模式比标准 Codex 运行消耗更多的积分/令牌。",
+    "fastModeUnsupported": "快速模式目前仅适用于 {{models}}。在切换模型之前，Paperclip 将忽略此开关。",
+    "claude": {
+      "local": {
+        "instructionsPath": "指令文件路径"
+      }
+    },
+    "codex": {
+      "projectPath": "项目路径"
+    },
+    "placeholders": {
+      "gatewayUrl": "ws://127.0.0.1:18789",
+      "paperclipApiUrl": "https://paperclip.example",
+      "claimedApiKeyPath": "~/.openclaw/workspace/paperclip-claimed-api-key.json",
+      "sessionKey": "paperclip",
+      "role": "operator",
+      "scopes": "operator.admin",
+      "waitTimeoutMs": "120000",
+      "instructionsFilePath": "/absolute/path/to/AGENTS.md",
+      "command": "例如：node, python",
+      "args": "例如：script.js, --flag"
+    }
+  },
+  "comments": {
+    "title": "评论",
+    "addComment": "添加评论...",
+    "reply": "回复",
+    "send": "发送"
+  },
+  "skills": {
+    "title": "技能",
+    "newSkill": "新建技能",
+    "skillName": "技能名称",
+    "shortDescription": "简短描述",
+    "filterSkills": "筛选技能",
+    "pastePath": "粘贴路径、GitHub URL 或 skills.sh 命令"
+  },
+  "schedule": {
+    "title": "计划",
+    "cronExpression": "Cron 表达式",
+    "interval": "间隔",
+    "every": "每",
+    "minutes": "分钟",
+    "hours": "小时",
+    "days": "天",
+    "custom": "自定义"
+  },
+  "finance": {
+    "billing": "账单",
+    "subscription": "订阅",
+    "usage": "用量",
+    "totalSpend": "总支出",
+    "thisMonth": "本月"
+  }
+}

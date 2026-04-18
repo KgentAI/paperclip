@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Camera, LoaderCircle, Save, Trash2, UserRoundPen } from "lucide-react";
 import type { AuthSession, CurrentUserProfile, UpdateCurrentUserProfile } from "@paperclipai/shared";
@@ -11,6 +12,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 function deriveInitials(name: string) {
   const parts = name.trim().split(/\s+/).filter(Boolean);
@@ -19,6 +21,7 @@ function deriveInitials(name: string) {
 }
 
 export function ProfileSettings() {
+  const { t, i18n } = useTranslation();
   const { setBreadcrumbs } = useBreadcrumbs();
   const { selectedCompanyId, selectedCompany } = useCompany();
   const queryClient = useQueryClient();
@@ -258,6 +261,19 @@ export function ProfileSettings() {
             <p className="text-xs text-muted-foreground">
               Email is managed by your auth session and is read-only here.
             </p>
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-medium">{t("settings.profile.language")}</label>
+            <Select value={i18n.language?.startsWith("zh") ? "zh" : "en"} onValueChange={(lng) => i18n.changeLanguage(lng)}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="en">{t("settings.profile.languageOptions.en")}</SelectItem>
+                <SelectItem value="zh">{t("settings.profile.languageOptions.zh")}</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
           <div className="md:col-span-2 flex justify-end">
