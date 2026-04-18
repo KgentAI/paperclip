@@ -14,18 +14,20 @@ function resolve(obj: Record<string, unknown>, path: string): string {
   return typeof current === "string" ? current : path;
 }
 
+function tMock(key: string, params?: Record<string, unknown>): string {
+  let value = resolve(en as Record<string, unknown>, key);
+  if (params) {
+    value = Object.entries(params).reduce(
+      (str, [k, v]) => str.replace(new RegExp(`\\{\\{${k}\\}\\}`, "g"), String(v)),
+      value,
+    );
+  }
+  return value;
+}
+
 vi.mock("react-i18next", () => ({
   useTranslation: () => ({
-    t: (key: string, params?: Record<string, unknown>) => {
-      let value = resolve(en as Record<string, unknown>, key);
-      if (params) {
-        value = Object.entries(params).reduce(
-          (str, [k, v]) => str.replace(new RegExp(`\\{\\{${k}\\}\\}`, "g"), String(v)),
-          value,
-        );
-      }
-      return value;
-    },
+    t: tMock,
     i18n: {
       language: "en",
       changeLanguage: vi.fn(),
@@ -33,4 +35,9 @@ vi.mock("react-i18next", () => ({
   }),
   Trans: ({ children }: { children: React.ReactNode }) => children,
   initReactI18next: { type: "3rdParty", init: vi.fn() },
+}));
+
+vi.mock("i18next", () => ({
+  t: tMock,
+  default: { t: tMock },
 }));

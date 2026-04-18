@@ -252,7 +252,7 @@ function IssueSearchInput({
             e.currentTarget.blur();
           }
         }}
-        placeholder={t("issues.filter.search")}
+        placeholder={t("issues.filter.searchPlaceholder")}
         className="pl-7 text-xs sm:text-sm"
         aria-label={t("issues.filter.search")}
         data-page-search-target="true"
@@ -666,7 +666,7 @@ export function IssuesList({
   }, [baseCreateIssueDefaults, currentUserId, issueById, projectId, viewState.groupBy]);
 
   const createActionLabel = createIssueLabel ? `${t("common.action.create")} ${createIssueLabel}` : t("issues.createIssue");
-  const createButtonLabel = createIssueLabel ? `${t("common.action.add")} ${createIssueLabel}` : t("issues.newIssue");
+  const createButtonLabel = createIssueLabel ? `${t("common.action.new")} ${createIssueLabel}` : t("issues.newIssue");
   const openCreateIssueDialog = useCallback((groupKey?: string) => {
     openNewIssue(newIssueDefaults(groupKey));
   }, [newIssueDefaults, openNewIssue]);
@@ -853,7 +853,7 @@ export function IssuesList({
       {error && <p className="text-sm text-destructive">{error.message}</p>}
       {normalizedIssueSearch.length > 0 && searchedIssues.length === ISSUE_SEARCH_RESULT_LIMIT && (
         <p className="text-xs text-muted-foreground">
-          {t("common.action.noResults")}
+           {t("issues.searchRefinementHint", { count: ISSUE_SEARCH_RESULT_LIMIT })}
         </p>
       )}
       {!isLoading && filtered.length === 0 && viewState.viewMode === "list" && (
@@ -1141,10 +1141,10 @@ export function IssuesList({
           </Collapsible>
           );
           })}
-          {remainingIssueRowCount > 0 && (
-            <p className="text-xs text-muted-foreground">
-              {t("common.action.loading")}
-            </p>
+           {remainingIssueRowCount > 0 && (
+             <p className="text-xs text-muted-foreground">
+               {t("issues.renderingCount", { shown: Math.min(renderedIssueRowLimit, filtered.length), total: filtered.length })}
+             </p>
           )}
         </>
       )}

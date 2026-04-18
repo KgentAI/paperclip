@@ -347,16 +347,16 @@ export function IssueFiltersPopover({
               ) : null}
 
               {enableRoutineVisibilityFilter ? (
-                <div className="space-y-1">
-                  <span className="text-xs text-muted-foreground">{t("common.label.status")}</span>
-                  <label className="flex cursor-pointer items-center gap-2 rounded-sm px-2 py-1 hover:bg-accent/50">
-                    <Checkbox
-                      checked={state.hideRoutineExecutions}
-                      onCheckedChange={(checked) => onChange({ hideRoutineExecutions: checked === true })}
-                    />
-                    <span className="text-sm">{t("routines.title")}</span>
-                  </label>
-                </div>
+                 <div className="space-y-1">
+                   <span className="text-xs text-muted-foreground">{t("common.label.visibility")}</span>
+                   <label className="flex cursor-pointer items-center gap-2 rounded-sm px-2 py-1 hover:bg-accent/50">
+                     <Checkbox
+                       checked={state.hideRoutineExecutions}
+                       onCheckedChange={(checked) => onChange({ hideRoutineExecutions: checked === true })}
+                     />
+                     <span className="text-sm">{t("issues.hideRoutineRuns")}</span>
+                   </label>
+                 </div>
               ) : null}
             </div>
           </div>

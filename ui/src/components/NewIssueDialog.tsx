@@ -1381,7 +1381,7 @@ export function NewIssueDialog() {
               )}
               {showParentWorkspaceWarning ? (
                 <div className="rounded-md border border-amber-300/60 bg-amber-50 px-2 py-1.5 text-[11px] text-amber-900 dark:border-amber-800/70 dark:bg-amber-950/30 dark:text-amber-100">
-                  {t("issues.parentWorkspaceWarning", { label: parentExecutionWorkspaceLabel ?? "" })}
+                  Warning: {t("issues.parentWorkspaceWarning", { label: parentExecutionWorkspaceLabel ? ` (${parentExecutionWorkspaceLabel})` : "" })}
                 </div>
               ) : null}
             </div>
