@@ -12,11 +12,20 @@ export class ApiError extends Error {
   }
 }
 
+function getKgentToken(): string | null {
+  return localStorage.getItem("kgent_auth_token");
+}
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const headers = new Headers(init?.headers ?? undefined);
   const body = init?.body;
   if (!(body instanceof FormData) && !headers.has("Content-Type")) {
     headers.set("Content-Type", "application/json");
+  }
+  
+  const kgentToken = getKgentToken();
+  if (kgentToken && !headers.has("Authorization")) {
+    headers.set("Authorization", `Bearer ${kgentToken}`);
   }
 
   const res = await fetch(`${BASE}${path}`, {

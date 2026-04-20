@@ -37,7 +37,16 @@ vi.mock("@/lib/router", () => ({
   Routes: ({ children }: { children?: ReactNode }) => <>{children}</>,
   useLocation: () => ({ pathname: "/instance/settings/general", search: "", hash: "" }),
   useParams: () => ({}),
+  useSearchParams: () => [new URLSearchParams(), () => {}],
 }));
+
+vi.mock("react-router-dom", async () => {
+  const actual = await vi.importActual<typeof import("react-router-dom")>("react-router-dom");
+  return {
+    ...actual,
+    useSearchParams: () => [new URLSearchParams(), () => {}],
+  };
+});
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 (globalThis as any).IS_REACT_ACT_ENVIRONMENT = true;

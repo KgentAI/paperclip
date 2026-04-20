@@ -4,6 +4,8 @@ import { accessApi } from "@/api/access";
 import { authApi } from "@/api/auth";
 import { healthApi } from "@/api/health";
 import { queryKeys } from "@/lib/queryKeys";
+import { useKgentAuthToken, getKgentToken, removeKgentToken } from "@/hooks/useAuthToken";
+import { useEffect, useState } from "react";
 
 function BootstrapPendingPage({ hasActiveInvite = false }: { hasActiveInvite?: boolean }) {
   return (
@@ -40,8 +42,30 @@ function NoBoardAccessPage() {
   );
 }
 
+function KgentAuthErrorPage() {
+  return (
+    <div className="mx-auto max-w-xl py-10">
+      <div className="rounded-lg border border-border bg-card p-6">
+        <h1 className="text-xl font-semibold">Authentication expired</h1>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Your kgent session has expired or is invalid.
+        </p>
+        <p className="mt-2 text-sm text-muted-foreground">
+          请从 kgent 平台重新跳转
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export function CloudAccessGate() {
   const location = useLocation();
+  const [kgentAuthError, setKgentAuthError] = useState(false);
+  
+  const { isProcessing: isKgentProcessing, hasToken: hasKgentToken } = useKgentAuthToken();
+  const kgentToken = getKgentToken();
+  const isKgentAuth = !!kgentToken;
+
   const healthQuery = useQuery({
     queryKey: queryKeys.health,
     queryFn: () => healthApi.get(),
@@ -58,24 +82,40 @@ export function CloudAccessGate() {
   });
 
   const isAuthenticatedMode = healthQuery.data?.deploymentMode === "authenticated";
+  
   const sessionQuery = useQuery({
     queryKey: queryKeys.auth.session,
     queryFn: () => authApi.getSession(),
-    enabled: isAuthenticatedMode,
+    enabled: isAuthenticatedMode && !isKgentAuth,
     retry: false,
   });
 
   const boardAccessQuery = useQuery({
     queryKey: queryKeys.access.currentBoardAccess,
     queryFn: () => accessApi.getCurrentBoardAccess(),
-    enabled: isAuthenticatedMode && !!sessionQuery.data,
+    enabled: isAuthenticatedMode && (!!sessionQuery.data || isKgentAuth),
     retry: false,
   });
 
+  useEffect(() => {
+    if (boardAccessQuery.error) {
+      const error = boardAccessQuery.error as { status?: number };
+      if (error.status === 401 && isKgentAuth) {
+        removeKgentToken();
+        setKgentAuthError(true);
+      }
+    }
+  }, [boardAccessQuery.error, isKgentAuth]);
+
+  if (kgentAuthError) {
+    return <KgentAuthErrorPage />;
+  }
+
   if (
     healthQuery.isLoading ||
-    (isAuthenticatedMode && sessionQuery.isLoading) ||
-    (isAuthenticatedMode && !!sessionQuery.data && boardAccessQuery.isLoading)
+    isKgentProcessing ||
+    (isAuthenticatedMode && !isKgentAuth && sessionQuery.isLoading) ||
+    (isAuthenticatedMode && (isKgentAuth || !!sessionQuery.data) && boardAccessQuery.isLoading)
   ) {
     return <div className="mx-auto max-w-xl py-10 text-sm text-muted-foreground">Loading...</div>;
   }
@@ -96,14 +136,14 @@ export function CloudAccessGate() {
     return <BootstrapPendingPage hasActiveInvite={healthQuery.data.bootstrapInviteActive} />;
   }
 
-  if (isAuthenticatedMode && !sessionQuery.data) {
+  if (isAuthenticatedMode && !isKgentAuth && !sessionQuery.data) {
     const next = encodeURIComponent(`${location.pathname}${location.search}`);
     return <Navigate to={`/auth?next=${next}`} replace />;
   }
 
   if (
     isAuthenticatedMode &&
-    sessionQuery.data &&
+    (isKgentAuth || sessionQuery.data) &&
     !boardAccessQuery.data?.isInstanceAdmin &&
     (boardAccessQuery.data?.companyIds.length ?? 0) === 0
   ) {

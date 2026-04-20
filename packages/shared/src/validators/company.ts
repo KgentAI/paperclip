@@ -6,6 +6,7 @@ const brandColorSchema = z.string().regex(/^#[0-9a-fA-F]{6}$/).nullable().option
 const feedbackDataSharingTermsVersionSchema = z.string().min(1).nullable().optional();
 
 export const createCompanySchema = z.object({
+  id: z.string().uuid().optional(),  // Allows kgent to force company_id = tenant_id
   name: z.string().min(1),
   description: z.string().optional().nullable(),
   budgetMonthlyCents: z.number().int().nonnegative().optional().default(0),

@@ -139,9 +139,13 @@ export function companyService(db: Db) {
     while (suffix < 10000) {
       const candidate = `${base}${suffixForAttempt(suffix)}`;
       try {
+        // If id is provided (e.g., from kgent tenant_id), use it; otherwise let DB generate
+        const insertData = data.id
+          ? { ...data, issuePrefix: candidate }
+          : { ...data, issuePrefix: candidate };
         const rows = await db
           .insert(companies)
-          .values({ ...data, issuePrefix: candidate })
+          .values(insertData)
           .returning();
         return rows[0];
       } catch (error) {

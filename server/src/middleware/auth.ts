@@ -8,6 +8,7 @@ import type { DeploymentMode } from "@paperclipai/shared";
 import type { BetterAuthSessionResult } from "../auth/better-auth.js";
 import { logger } from "./logger.js";
 import { boardAuthService } from "../services/board-auth.js";
+import { resolveKgentActor, isKgentToken } from "./kgent-auth.js";
 
 function hashToken(token: string) {
   return createHash("sha256").update(token).digest("hex");
@@ -94,6 +95,18 @@ export function actorMiddleware(db: Db, opts: ActorMiddlewareOptions): RequestHa
     if (!token) {
       next();
       return;
+    }
+
+    if (isKgentToken(token)) {
+      const kgentActor = await resolveKgentActor(token, db);
+      if (kgentActor) {
+        req.actor = {
+          ...kgentActor,
+          runId: runIdHeader ?? undefined,
+        };
+        next();
+        return;
+      }
     }
 
     const boardKey = await boardAuth.findBoardApiKeyByToken(token);

@@ -5,6 +5,7 @@ import {
   type CurrentUserProfile,
   type UpdateCurrentUserProfile,
 } from "@paperclipai/shared";
+import { getKgentToken } from "@/hooks/useAuthToken";
 
 type AuthErrorBody =
   | {
@@ -61,10 +62,15 @@ function extractAuthError(payload: AuthErrorBody, status: number) {
 }
 
 async function authPost(path: string, body: Record<string, unknown>) {
+  const headers: Record<string, string> = { "Content-Type": "application/json" };
+  const kgentToken = getKgentToken();
+  if (kgentToken) {
+    headers["Authorization"] = `Bearer ${kgentToken}`;
+  }
   const res = await fetch(`/api/auth${path}`, {
     method: "POST",
     credentials: "include",
-    headers: { "Content-Type": "application/json" },
+    headers,
     body: JSON.stringify(body),
   });
   const payload = await res.json().catch(() => null);
@@ -75,10 +81,15 @@ async function authPost(path: string, body: Record<string, unknown>) {
 }
 
 async function authPatch<T>(path: string, body: Record<string, unknown>, parse: (value: unknown) => T): Promise<T> {
+  const headers: Record<string, string> = { "Content-Type": "application/json", Accept: "application/json" };
+  const kgentToken = getKgentToken();
+  if (kgentToken) {
+    headers["Authorization"] = `Bearer ${kgentToken}`;
+  }
   const res = await fetch(`/api/auth${path}`, {
     method: "PATCH",
     credentials: "include",
-    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    headers,
     body: JSON.stringify(body),
   });
   const payload = await res.json().catch(() => null);
@@ -90,9 +101,14 @@ async function authPatch<T>(path: string, body: Record<string, unknown>, parse: 
 
 export const authApi = {
   getSession: async (): Promise<AuthSession | null> => {
+    const headers: Record<string, string> = { Accept: "application/json" };
+    const kgentToken = getKgentToken();
+    if (kgentToken) {
+      headers["Authorization"] = `Bearer ${kgentToken}`;
+    }
     const res = await fetch("/api/auth/get-session", {
       credentials: "include",
-      headers: { Accept: "application/json" },
+      headers,
     });
     if (res.status === 401) return null;
     const payload = await res.json().catch(() => null);
@@ -114,9 +130,14 @@ export const authApi = {
   },
 
   getProfile: async (): Promise<CurrentUserProfile> => {
+    const headers: Record<string, string> = { Accept: "application/json" };
+    const kgentToken = getKgentToken();
+    if (kgentToken) {
+      headers["Authorization"] = `Bearer ${kgentToken}`;
+    }
     const res = await fetch("/api/auth/profile", {
       credentials: "include",
-      headers: { Accept: "application/json" },
+      headers,
     });
     const payload = await res.json().catch(() => null);
     if (!res.ok) {
