@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: paperclip-service
-        image: crpi-fuyc4hblpwipiz5a.cn-hongkong.personal.cr.aliyuncs.com/kgent/paperclip:sha-c0180bf0
+        image: crpi-fuyc4hblpwipiz5a.cn-hongkong.personal.cr.aliyuncs.com/kgent/paperclip:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 3100
@@ -39,7 +39,7 @@ spec:
         - name: PAPERCLIP_DEPLOYMENT_MODE
           value: authenticated
         - name: PAPERCLIP_DEPLOYMENT_EXPOSURE
-          value: private
+          value: public
         - name: PAPERCLIP_PUBLIC_URL
           value: https://workspace-dev.kgent.ai
         - name: PAPERCLIP_HOME
@@ -110,4 +110,3 @@ spec:
       volumes:
       - name: paperclip-home
         emptyDir: {}
-# rebuild trigger
