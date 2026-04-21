@@ -1,33 +1,39 @@
-name: Docker
+name: Build and Push to ACR
 
 on:
   push:
     branches:
-      - "master"
-    tags:
-      - "v*"
+      - master
+    paths-ignore:
+      - '**.md'
+      - 'doc/**'
+      - '.github/PULL_REQUEST_TEMPLATE.md'
+      - 'LICENSE'
 
-permissions:
-  contents: read
-  packages: write
+env:
+  ACR_REGISTRY: crpi-fuyc4hblpwipiz5a-vpc.cn-hongkong.personal.cr.aliyuncs.com
+  ACR_NAMESPACE: kgent
+  ACR_REPO: paperclip
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     concurrency:
-      group: docker-${{ github.ref }}
+      group: acr-${{ github.ref }}
       cancel-in-progress: true
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Login to GitHub Container Registry
+      - name: Login to ACR
+        if: github.ref == 'refs/heads/master'
         uses: docker/login-action@v3
         with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: ${{ env.ACR_REGISTRY }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -36,19 +42,16 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/${{ github.repository }}
+          images: ${{ env.ACR_REGISTRY }}/${{ env.ACR_NAMESPACE }}/${{ env.ACR_REPO }}
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
             type=sha
 
-      - name: Build and push
+      - name: Build
         uses: docker/build-push-action@v6
         with:
           context: .
-          platforms: linux/amd64,linux/arm64
-          push: true
+          push: ${{ github.ref == 'refs/heads/master' }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           tags: ${{ steps.meta.outputs.tags }}
