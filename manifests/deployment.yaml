@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: paperclip-service
-        image: crpi-fuyc4hblpwipiz5a.cn-hongkong.personal.cr.aliyuncs.com/kgent/paperclip:latest
+        image: crpi-fuyc4hblpwipiz5a.cn-hongkong.personal.cr.aliyuncs.com/kgent/paperclip:sha-c0180bf0
         imagePullPolicy: Always
         ports:
         - containerPort: 3100
@@ -110,3 +110,4 @@ spec:
       volumes:
       - name: paperclip-home
         emptyDir: {}
+# rebuild trigger
