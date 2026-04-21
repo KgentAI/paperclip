@@ -11,7 +11,7 @@ on:
       - 'LICENSE'
 
 env:
-  ACR_REGISTRY: crpi-fuyc4hblpwipiz5a-vpc.cn-hongkong.personal.cr.aliyuncs.com
+  ACR_REGISTRY: crpi-fuyc4hblpwipiz5a.cn-hongkong.personal.cr.aliyuncs.com
   ACR_NAMESPACE: kgent
   ACR_REPO: paperclip
 
