@@ -1,0 +1,113 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paperclip-service
+  namespace: dev
+  labels:
+    app: paperclip-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: paperclip-service
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: paperclip-service
+    spec:
+      containers:
+      - name: paperclip-service
+        image: crpi-fuyc4hblpwipiz5a-vpc.cn-hongkong.personal.cr.aliyuncs.com/kgent/paperclip:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3100
+          protocol: TCP
+        env:
+        # ── 基础配置 ──
+        - name: NODE_ENV
+          value: production
+        - name: PORT
+          value: "3100"
+        - name: SERVE_UI
+          value: "true"
+        - name: HOST
+          value: "0.0.0.0"
+
+        # ── Paperclip 运行模式 ──
+        - name: PAPERCLIP_DEPLOYMENT_MODE
+          value: authenticated
+        - name: PAPERCLIP_DEPLOYMENT_EXPOSURE
+          value: private
+        - name: PAPERCLIP_PUBLIC_URL
+          value: https://workspace-dev.kgent.ai
+        - name: PAPERCLIP_HOME
+          value: /paperclip
+        - name: PAPERCLIP_INSTANCE_ID
+          value: default
+
+        # ── 数据库 (RDS) ──
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: paperclip-pg-secrets
+              key: database-url
+
+        # ── 认证 ──
+        - name: BETTER_AUTH_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: paperclip-secrets
+              key: better-auth-secret
+        - name: PAPERCLIP_KGENT_RSA_PUBLIC_KEY
+          valueFrom:
+            secretKeyRef:
+              name: paperclip-kgent-secrets
+              key: jwt-rsa-public-key
+
+        # ── Agent 配置 ──
+        - name: OPENCODE_ALLOW_ALL_MODELS
+          value: "true"
+        - name: NODE_OPTIONS
+          value: "--max-old-space-size=4096"
+
+        # ── 健康检查 ──
+        livenessProbe:
+          httpGet:
+            path: /api/health
+            port: 3100
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /api/health
+            port: 3100
+          initialDelaySeconds: 10
+          periodSeconds: 15
+          timeoutSeconds: 5
+          failureThreshold: 3
+
+        # ── 资源限制 ──
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"
+
+        # ── 存储卷挂载 ──
+        volumeMounts:
+        - name: paperclip-home
+          mountPath: /paperclip
+
+      imagePullSecrets:
+      - name: acr-registry-secret-dev
+
+      volumes:
+      - name: paperclip-home
+        persistentVolumeClaim:
+          claimName: paperclip-home-pvc
