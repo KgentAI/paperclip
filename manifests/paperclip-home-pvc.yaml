@@ -11,4 +11,8 @@ spec:
   resources:
     requests:
       storage: 2Gi
+<<<<<<< HEAD
   storageClassName: alicloud-disk-essd
+=======
+  storageClassName: alicloud-disk-topology-alltype
+>>>>>>> ed9cc361 (deploy: add K8s manifests for paperclip dev deployment)
