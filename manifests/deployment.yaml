@@ -60,11 +60,11 @@ spec:
             secretKeyRef:
               name: paperclip-secrets
               key: better-auth-secret
-        - name: PAPERCLIP_KGENT_RSA_PUBLIC_KEY
+        - name: PAPERCLIP_KGENT_SHARED_SECRET
           valueFrom:
             secretKeyRef:
               name: paperclip-kgent-secrets
-              key: jwt-rsa-public-key
+              key: jwt-shared-secret
 
         # ── Agent 配置 ──
         - name: OPENCODE_ALLOW_ALL_MODELS
