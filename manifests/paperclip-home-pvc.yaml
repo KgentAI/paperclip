@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: paperclip-home-pvc
+  name: paperclip-home
   namespace: dev
   labels:
     app: paperclip-service
@@ -10,5 +10,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 2Gi
+      storage: 20Gi
   storageClassName: alicloud-disk-topology-alltype
